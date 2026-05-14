@@ -7,13 +7,15 @@ import Search from "./pages/Search";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/category/:categoryName" element={<Category />} />
-      <Route path="/recipe/:recipeId" element={<RecipeDetail />} />
-      <Route path="/favorites" element={<Favorites />} />
-      <Route path="/search" element={<Search />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/category/:categoryName" element={<Category />} />
+        <Route path="/recipe/:recipeId" element={<RecipeDetail />} />
+        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/search" element={<Search />} />
+      </Routes>
+    </>
   );
 }
 

@@ -4,12 +4,14 @@ import Spinner from "../components/Spinner";
 import ErrorMessage from "../components/ErrorMessage";
 import { API } from "../api/endpoints";
 import type { RecipeDetail } from "../types";
+import { useFavorites } from "../context/FavoritesContext";
 
 interface RecipeDetailResponse {
   meals: RecipeDetail[] | null;
 }
 
 export default function RecipeDetail() {
+  const { isFavorite, addFavorite, removeFavorite } = useFavorites();
   const { recipeId } = useParams<{ recipeId: string }>();
 
   const { data, loading, error } = useFetch<RecipeDetailResponse>(
@@ -69,7 +71,19 @@ export default function RecipeDetail() {
         }}
       />
 
-      <button>⭐ Favorites</button>
+      <button
+        onClick={() => {
+          if (isFavorite(recipe.idMeal)) {
+            removeFavorite(recipe.idMeal);
+          } else {
+            addFavorite(recipe.idMeal);
+          }
+        }}
+      >
+        {isFavorite(recipe.idMeal)
+          ? "➖ Remove from Favorites"
+          : "➕ Add to Favorites"}
+      </button>
 
       <h2>Ingredients</h2>
       <ul style={{ lineHeight: "1.8" }}>
